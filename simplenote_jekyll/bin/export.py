@@ -43,7 +43,7 @@ def compile_frontmatter(data):
     out = []
     out.append('---')
     out.append('{}: {}'.format('layout', 'post'))
-    out.append('{}: {}'.format('title', data['title']))
+    out.append('{}: \'{}\''.format('title', data['title']))
     out.append('{}: {}'.format('date', data['created']))
     out.append('{}: {}'.format('created', data['created']))
     out.append('{}: {}'.format('updated', data['updated']))
