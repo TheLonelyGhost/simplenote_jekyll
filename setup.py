@@ -67,7 +67,7 @@ setup(
     test_suite='test',
     entry_points={
         'console_scripts': [
-            'sn-export = simplenote_jekyll.bin:main',
+            'sn-export = simplenote_jekyll.bin.export:main',
         ],
     },
     extras_require={
