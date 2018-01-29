@@ -21,8 +21,16 @@ def process_note(note):
     created = datetime.fromtimestamp(int(note['createdate'].split('.')[0]))
     updated = datetime.fromtimestamp(int(note['modifydate'].split('.')[0]))
     tags = [slugify(tag) for tag in note['tags'] if tag != 'blog']
-    title = note['content'].splitlines()[0]
-    content = '\n'.join(note['content'].splitlines()[1:])
+    lines = note['content'].splitlines()
+    title = lines[0]
+    title = re.compile(r'^\s*#+\s+', re.IGNORECASE)\
+        .sub('', title)
+    title = re.compile(r'\s+#+\s*$', re.IGNORECASE)\
+        .sub('', title)
+    if lines[1].strip() == '':
+        content = '\n'.join(lines[2:])
+    else:
+        content = '\n'.join(lines[1:])
 
     filename = '{}-{}.md'.format(
         created.isoformat(sep='T').split('T')[0],
